@@ -1,46 +1,4 @@
-/**
-  Generated main.c file from MPLAB Code Configurator
 
-  @Company
-    Microchip Technology Inc.
-
-  @File Name
-    main.c
-
-  @Summary
-    This is the generated main.c using PIC24 / dsPIC33 / PIC32MM MCUs.
-
-  @Description
-    This source file provides main entry point for system initialization and application code development.
-    Generation Information :
-        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.171.1
-        Device            :  PIC32MM0256GPM064
-    The generated drivers are tested against the following:
-        Compiler          :  XC16 v1.70
-        MPLAB 	          :  MPLAB X v5.50
-*/
-
-/*
-    (c) 2020 Microchip Technology Inc. and its subsidiaries. You may use this
-    software and any derivatives exclusively with Microchip products.
-
-    THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
-    EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED
-    WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
-    PARTICULAR PURPOSE, OR ITS INTERACTION WITH MICROCHIP PRODUCTS, COMBINATION
-    WITH ANY OTHER PRODUCTS, OR USE IN ANY APPLICATION.
-
-    IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE,
-    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND
-    WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS
-    BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE
-    FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
-    ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
-    THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-
-    MICROCHIP PROVIDES THIS SOFTWARE CONDITIONALLY UPON YOUR ACCEPTANCE OF THESE
-    TERMS.
-*/
 
 /**
   Section: Included Files
@@ -64,21 +22,91 @@ int main(void)
     LEDA_SetLow();
     LEDB_SetLow();
     while(1){
-        if(BTN1_GetValue()==1){
-            
-            LEDA_Toggle();
+          
+        if(BTN1_GetValue()){
+            LEDA_SetHigh();
+            UT_delay();
         }
-       
-        if(BTN2_GetValue()==1){
-            LEDB_Toggle();
+        if(BTN2_GetValue()){
+            LEDB_SetHigh();
+            UT_delay();
+             
         }
-        while(BTN1_GetValue() || BTN2_GetValue()){
-            Nop();
-        };
     }
     return 1; 
 }
+
 /**
- End of File
+ * PARTE 1 E
+ * 
+ * 
+int main(void)
+{
+    int FLAGA = 0, FLAGB = 0;
+    // initialize the device
+    SYSTEM_Initialize();
+    BTN1_SetDigitalInput();
+    BTN2_SetDigitalInput();
+    LEDA_SetDigitalOutput();
+    LEDB_SetDigitalOutput();
+    LEDA_SetLow();
+    LEDB_SetLow();
+    
+    while(1){
+
+            if(BTN1_GetValue()==1){
+                LEDA_SetHigh();
+            }else {
+                 LEDA_SetLow();
+            }
+
+            if(BTN2_GetValue()==1){
+                LEDB_SetHigh();
+            }else {
+                LEDB_SetLow();
+               
+            }
+    }
+    return 1; 
+}
+ */
+  
+/**
+ * PARTE 1 F
+ * 
+ *
+ int main(void)
+{
+    int FLAGA = 0, FLAGB = 0;
+    // initialize the device
+    SYSTEM_Initialize();
+    BTN1_SetDigitalInput();
+    BTN2_SetDigitalInput();
+    LEDA_SetDigitalOutput();
+    LEDB_SetDigitalOutput();
+    LEDA_SetLow();
+    LEDB_SetLow();
+    
+    while(1){
+
+            if(BTN1_GetValue() && FLAGA==0){
+                FLAGA=1;
+            }
+            if(BTN1_GetValue()== 0 && FLAGA== 1){
+                LEDA_Toggle();
+                FLAGA=0;
+            }
+
+            if(BTN2_GetValue() && FLAGB==0){
+                 FLAGB=1;
+            }
+            if(BTN2_GetValue()==0 && FLAGB==1){
+                LEDB_Toggle();
+                 FLAGB=0;
+            }
+    }
+    return 1; 
+}
+ * 
 */
 
