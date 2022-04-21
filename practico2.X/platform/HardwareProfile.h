@@ -12,6 +12,7 @@ extern "C" {
 #define LEDA_SetDigitalOutput() (TRISAbits.TRISA7 = 0)
 #define LEDB_SetDigitalOutput() (TRISBbits.TRISB14 = 0)
 
+    
 #define LEDA_SetLow() (LATAbits.LATA7 = 0)
 #define LEDA_SetHigh() (LATAbits.LATA7 = 1)
 #define LEDB_SetLow() (LATBbits.LATB14 = 0)

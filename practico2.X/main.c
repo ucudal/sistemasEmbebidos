@@ -1,78 +1,83 @@
-
-
 /**
-  Section: Included Files
-*/
+ Section: Included Files
+ */
 #include "mcc_generated_files/system.h"
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/clock.h"
 #include "utils/utils.h"
+#include "platform/HardwareProfile.h"
+#include "platform/buttons.h"
 
 /*
-                         Main application
+ Main application
  */
-int main(void)
-{
-    // initialize the device
-    SYSTEM_Initialize();
-    BTN1_SetDigitalInput();
-    BTN2_SetDigitalInput();
-    LEDA_SetDigitalOutput();
-    LEDB_SetDigitalOutput();
-    LEDA_SetLow();
-    LEDB_SetLow();
-    while(1){
-          
-        if(BTN1_GetValue()){
-            LEDA_SetHigh();
-            UT_delay();
-        }
-        if(BTN2_GetValue()){
-            LEDB_SetHigh();
-            UT_delay();
-             
-        }
-    }
-    return 1; 
-}
-
-/**
- * PARTE 1 E
- * 
- * 
 int main(void)
 {
     int FLAGA = 0, FLAGB = 0;
     // initialize the device
     SYSTEM_Initialize();
+    
     BTN1_SetDigitalInput();
     BTN2_SetDigitalInput();
     LEDA_SetDigitalOutput();
     LEDB_SetDigitalOutput();
+    BTN1_SetInterruptHandler(&BTN1_set);
+    BTN2_SetInterruptHandler(&BTN2_set); 
     LEDA_SetLow();
     LEDB_SetLow();
+      
     
     while(1){
 
-            if(BTN1_GetValue()==1){
-                LEDA_SetHigh();
-            }else {
-                 LEDA_SetLow();
-            }
-
-            if(BTN2_GetValue()==1){
-                LEDB_SetHigh();
-            }else {
-                LEDB_SetLow();
-               
-            }
+        if(!BTN1_GetValue() && BTN1_get()){
+            LEDA_Toggle();
+            BTN1_reset();
+        }
+       
+        if(!BTN2_GetValue() && BTN2_get()){
+            LEDB_Toggle();
+            BTN2_reset();
+        } 
     }
     return 1; 
 }
- */
-  
 /**
- * PARTE 1 F
+ * PARTE E
+ * 
+ * 
+ int main(void)
+ {
+ int FLAGA = 0, FLAGB = 0;
+ // initialize the device
+ SYSTEM_Initialize();
+ BTN1_SetDigitalInput();
+ BTN2_SetDigitalInput();
+ LEDA_SetDigitalOutput();
+ LEDB_SetDigitalOutput();
+ LEDA_SetLow();
+ LEDB_SetLow();
+ 
+ while(1){
+ 
+ if(BTN1_GetValue()){
+ LEDA_SetHigh();
+ }else {
+ LEDA_SetLow();
+ }
+ 
+ if(BTN2_GetValue()){
+ LEDB_SetHigh();
+ }else {
+ LEDB_SetLow();
+ 
+ }
+ }
+ return 1; 
+ }
+ */
+
+/**
+ * PARTE F
  * 
  *
  int main(void)
@@ -88,25 +93,59 @@ int main(void)
     LEDB_SetLow();
     
     while(1){
-
-            if(BTN1_GetValue() && FLAGA==0){
-                FLAGA=1;
-            }
-            if(BTN1_GetValue()== 0 && FLAGA== 1){
-                LEDA_Toggle();
-                FLAGA=0;
-            }
-
-            if(BTN2_GetValue() && FLAGB==0){
-                 FLAGB=1;
-            }
-            if(BTN2_GetValue()==0 && FLAGB==1){
-                LEDB_Toggle();
-                 FLAGB=0;
-            }
+        if(BTN1_GetValue()){
+            FLAGA=1;
+        }
+        if(!BTN1_GetValue() && FLAGA){
+            LEDA_Toggle();
+            FLAGA=0;
+        }
+        if(BTN2_GetValue()){
+            FLAGB=1;
+        }
+        if(!BTN2_GetValue() && FLAGB){
+            LEDB_Toggle();
+            FLAGB=0;
+        } 
     }
     return 1; 
 }
  * 
-*/
+ */
 
+
+/****
+ PARTE 2 E
+ * 
+int main(void)
+{
+    int FLAGA = 0, FLAGB = 0;
+    // initialize the device
+    SYSTEM_Initialize();
+    
+    BTN1_SetDigitalInput();
+    BTN2_SetDigitalInput();
+    LEDA_SetDigitalOutput();
+    LEDB_SetDigitalOutput();
+    BTN1_SetInterruptHandler(BTN1_set);
+    BTN2_SetInterruptHandler(BTN2_set); 
+    LEDA_SetLow();
+    LEDB_SetLow();
+      
+    
+    while(1){
+
+        if(!BTN1_GetValue() && BTN1_get()){
+            LEDA_Toggle();
+            BTN1_reset();
+        }
+       
+        if(!BTN2_GetValue() && BTN2_get()){
+            LEDB_Toggle();
+            BTN2_reset();
+        } 
+    }
+    return 1; 
+}
+ 
+ */

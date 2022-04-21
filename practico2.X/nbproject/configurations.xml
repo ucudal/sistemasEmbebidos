@@ -34,6 +34,7 @@
         <itemPath>mcc_generated_files/system.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="platform" projectFiles="true">
+        <itemPath>platform/buttons.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="utils" projectFiles="true">
         <itemPath>utils/utils.c</itemPath>
@@ -45,10 +46,12 @@
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
       <itemPath>practico1.mc3</itemPath>
+      <itemPath>Lab02.mc3</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
     <Elem>utils</Elem>
+    <Elem>platform</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -782,6 +785,8 @@
         <property key="periphComp4.gte" value="gt"/>
         <property key="periphComp5.gte" value="gt"/>
         <property key="periphComp6.gte" value="gt"/>
+        <property key="programmerToGoFilePath"
+                  value="/Users/manuela/MPLABXProjects/practico2.X/debug/default/practico2_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.pgmentry.voltage" value="low"/>
@@ -1302,6 +1307,8 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="1d000000-1d03ffff"/>
+        <property key="programmerToGoFilePath"
+                  value="/Users/manuela/MPLABXProjects/practico2.X/debug/default/practico2_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.pgmentry.voltage" value="low"/>
