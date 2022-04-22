@@ -41,12 +41,14 @@
 #include "system.h"
 #include "interrupt_manager.h"
 #include "exceptions.h"
+#include "tmr2.h"
 
 void SYSTEM_Initialize(void)
 {
     PIN_MANAGER_Initialize();
     INTERRUPT_Initialize();
     CLOCK_Initialize();
+    TMR2_Initialize();
     INTERRUPT_GlobalEnable();
 }
 
