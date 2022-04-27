@@ -8,19 +8,14 @@ void UT_delay(void) {
     }
 } 
 
-void contarMili(){
-}
-
-
 void UT_delayms(int periodo){
-    int final = TMR2_SoftwareCounterGet() + periodo;
-    int max = 65535;
+    uint16_t inicial = TMR2_SoftwareCounterGet();
+    uint16_t final = inicial + periodo;
     
-    if(final> max){
-        final = max - final;
+    //Si se cumple la condicion es porque final hizo overflow, por lo que su valor es menor que el actual del timer
+    // por lo que debo "quemar" los ciclos hasta el final primero, para luego contar hasta el final.
+    if(final< inicial){
+        while(TMR2_SoftwareCounterGet()< MAX_TMR_COUNT);
     }
-    while(TMR2_SoftwareCounterGet()<final){
-        Nop();
-    }
-    
+    while(TMR2_SoftwareCounterGet()<final);
 }

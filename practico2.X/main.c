@@ -14,7 +14,7 @@
  */
 int main(void)
 {
-    int FLAGA = 0, FLAGB = 0;
+    int FLAGA = 0, FLAGB = 0, DELAY_TIME = 2000;
     // initialize the device
     SYSTEM_Initialize();
     
@@ -24,27 +24,25 @@ int main(void)
     LEDB_SetDigitalOutput();
     BTN1_SetInterruptHandler(&BTN1_set);
     BTN2_SetInterruptHandler(&BTN2_set); 
-    LEDA_SetLow();
-    LEDB_SetLow();
     TMR2_Initialize();
     TMR2_Start();
+    LEDA_SetLow();
+    LEDB_SetLow();
     
     while(1){
-        printf("%d", TMR2_SoftwareCounterGet());
-        
         if( BTN1_get()){
-            LEDA_SetHigh();
-            UT_delay();
-            LEDA_SetLow();
-            BTN1_reset();
+           LEDA_SetHigh();
+           UT_delayms(DELAY_TIME);
+           LEDA_SetLow();
+           BTN1_reset();
         }
         
-        if(BTN2_get()){
-            LEDB_SetHigh();
-            UT_delayms(200000);
-            LEDB_SetLow();            
-            BTN2_reset();
-        } 
+        if( BTN2_get()){
+           LEDB_SetHigh();
+           UT_delayms(DELAY_TIME);
+           LEDB_SetLow();
+           BTN2_reset();
+        }
     }
     return 1; 
 }
