@@ -549,7 +549,7 @@ uint8_t getsUSBUSART(uint8_t *buffer, uint8_t len)
     <code>
         if(USBUSARTIsTxTrfReady())
         {
-            cr data[] = {0x00, 0x01, 0x02, 0x03, 0x04};
+            char data[] = {0x00, 0x01, 0x02, 0x03, 0x04};
             putUSBUSART(data,5);
         }
     </code>

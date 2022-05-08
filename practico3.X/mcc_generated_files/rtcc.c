@@ -74,9 +74,9 @@ void RTCC_Initialize(void)
      
    if(!RTCCTimeInitialized())
    {
-       // set 2022-04-27 21-33-23
-       RTCDATE = 0x22042703; // Year/Month/Date/Wday
-       RTCTIME = 0x21332300; //  hours/minutes/seconds
+       // set 2022-05-06 21-38-37
+       RTCDATE = 0x22050605; // Year/Month/Date/Wday
+       RTCTIME = 0x21383700; //  hours/minutes/seconds
        
    }
        // ON enabled; OUTSEL Alarm Event; WRLOCK disabled; AMASK Every Half Second; ALMRPT 0; RTCOE disabled; CHIME disabled; ALRMEN disabled; 
@@ -121,8 +121,7 @@ void RTCC_TimeSet(struct tm *initialTime)
   
 
    // set RTCC initial time
-   RTCDATE = (ConvertHexToBCD(initialTime->tm_year) << 24) | (ConvertHexToBCD(initialTime->tm_mon) << 16 ) 
-           | (ConvertHexToBCD(initialTime->tm_mday) << 8) | ConvertHexToBCD(initialTime->tm_wday) ; // YEAR/MONTH-1/DAY-1/WEEKDAY
+   RTCDATE = (ConvertHexToBCD(initialTime->tm_year) << 24) | (ConvertHexToBCD(initialTime->tm_mon) << 16 ) | (ConvertHexToBCD(initialTime->tm_mday) << 8) | ConvertHexToBCD(initialTime->tm_wday) ; // YEAR/MONTH-1/DAY-1/WEEKDAY
    RTCTIME = (ConvertHexToBCD(initialTime->tm_hour) << 24) | (ConvertHexToBCD(initialTime->tm_min) << 16 ) | (ConvertHexToBCD(initialTime->tm_sec) << 8) ; // HOURS/MINUTES/SECOND
           
    // Enable RTCC 

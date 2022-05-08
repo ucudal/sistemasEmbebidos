@@ -1,24 +1,3 @@
-/**
-  @Generated PIC24 / dsPIC33 / PIC32MM MCUs Source File
-
-  @Company:
-    Microchip Technology Inc.
-
-  @File Name:
-    mcc.c
-
-  @Summary:
-    This is the mcc.c file generated using PIC24 / dsPIC33 / PIC32MM MCUs
-
-  @Description:
-    The configuration contents of this file are moved to system.c and this file will be removed in future MCC releases. 
-    Generation Information :
-        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.171.1
-        Device            :  PIC32MM0256GPM064
-    The generated drivers are tested against the following:
-        Compiler          :  XC16 v1.70
-        MPLAB             :  MPLAB X v5.50
-*/
 
 /*
     (c) 2020 Microchip Technology Inc. and its subsidiaries. You may use this

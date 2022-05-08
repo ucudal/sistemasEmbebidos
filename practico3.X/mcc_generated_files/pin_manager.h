@@ -1,49 +1,3 @@
-/**
-  PIN MANAGER Generated Driver File
-
-  @Company:
-    Microchip Technology Inc.
-
-  @File Name:
-    pin_manager.h
-
-  @Summary:
-    This is the generated manager file for the PIC24 / dsPIC33 / PIC32MM MCUs device.  This manager
-    configures the pins direction, initial state, analog setting.
-    The peripheral pin select, PPS, configuration is also handled by this manager.
-
-  @Description:
-    This source file provides implementations for PIN MANAGER.
-    Generation Information :
-        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.171.1
-        Device            :  PIC32MM0256GPM064
-    The generated drivers are tested against the following:
-        Compiler          :  XC32 v2.50
-        MPLAB 	          :  MPLAB X v5.50
-*/
-
-/*
-    (c) 2020 Microchip Technology Inc. and its subsidiaries. You may use this
-    software and any derivatives exclusively with Microchip products.
-
-    THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
-    EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED
-    WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
-    PARTICULAR PURPOSE, OR ITS INTERACTION WITH MICROCHIP PRODUCTS, COMBINATION
-    WITH ANY OTHER PRODUCTS, OR USE IN ANY APPLICATION.
-
-    IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE,
-    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND
-    WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS
-    BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE
-    FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
-    ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
-    THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-
-    MICROCHIP PROVIDES THIS SOFTWARE CONDITIONALLY UPON YOUR ACCEPTANCE OF THESE
-    TERMS.
-*/
-
 #ifndef _PIN_MANAGER_H
 #define _PIN_MANAGER_H
 /**
@@ -51,44 +5,175 @@
 */
 #include <xc.h>
 #include <stdbool.h>
-/**
-    Section: Device Pin Macros
-*/
 
-/**
-    Section: Function Prototypes
-*/
+void PIN_MANAGER_Initialize (void);
+
+void RB0_CallBack(void);
+
+void RB1_CallBack(void);
+
+void RB0_SetInterruptHandler(void (* InterruptHandler)(void));
+
+void __attribute__((deprecated("\nThis will be removed in future MCC releases. \nUse RB0_SetInterruptHandler instead."))) RB0_SetIOCInterruptHandler(void *handler);
+
+
+#define BTN2_SetHigh()          ( LATASET = (1 << 13) )
+
+ 
+#define BTN2_SetLow()           ( LATACLR = (1 << 13) )
+
+inline static void BTN2_SetValue(bool value)
+{
+  if(value)
+  {
+    BTN2_SetHigh();
+  }
+  else
+  {
+    BTN2_SetLow();
+  }
+}
+
+#define BTN2_Toggle()           ( LATAINV = (1 << 13) )
+
+#define BTN2_GetValue()         PORTAbits.RA13
+
+#define BTN2_SetDigitalInput()   ( TRISASET = (1 << 13) )
+
+#define BTN2_SetDigitalOutput()   ( TRISACLR = (1 << 13) )
+
+#define BTN1_SetHigh()          ( LATBSET = (1 << 15) )
+
+#define BTN1_SetLow()           ( LATBCLR = (1 << 15) )
+
+
+inline static void BTN1_SetValue(bool value)
+{
+  if(value)
+  {
+    BTN1_SetHigh();
+  }
+  else
+  {
+    BTN1_SetLow();
+  }
+}
+
+#define BTN1_Toggle()           ( LATBINV = (1 << 15) )
+
+#define BTN1_GetValue()         PORTBbits.RB15
+
+#define BTN1_SetDigitalInput()   ( TRISBSET = (1 << 15) )
+
+#define BTN1_SetDigitalOutput()   ( TRISBCLR = (1 << 15) )
+
+void PIN_MANAGER_Initialize (void);
+
+
+
+void BTN2_CallBack(void);
+
 /**
   @Summary
-    Configures the pin settings of the PIC32MM0256GPM064
-    The peripheral pin select, PPS, configuration is also handled by this manager.
+    Callback for BTN1 Pin.
 
   @Description
-    This is the generated manager file for the PIC24 / dsPIC33 / PIC32MM MCUs device.  This manager
-    configures the pins direction, initial state, analog setting.
-    The peripheral pin select, PPS, configuration is also handled by this manager.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
+    This routine is callback for BTN1 Pin
 
   @Param
     None.
 
-  @Example
+  @Returns
+    None
+ 
+ 
+  @Example 
     <code>
-    void SYSTEM_Initialize(void)
-    {
-        // Other initializers are called from this function
-        PIN_MANAGER_Initialize();
-    }
+        BTN1_SetInterruptHandler(&BTN1_CallBack);
     </code>
-
 */
-void PIN_MANAGER_Initialize (void);
+void BTN1_CallBack(void);
 
+
+/**
+  @Summary
+    Assigns a function pointer with a callback address.
+
+  @Description
+    This routine assigns a function pointer with a callback address.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        BTN2_SetInterruptHandler(&BTN2_CallBack);
+    </code>
+*/
+void BTN2_SetInterruptHandler(void (* InterruptHandler)(void));
+
+/**
+  @Summary
+    Assigns a function pointer with a callback address.
+
+  @Description
+    This routine assigns a function pointer with a callback address.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        BTN2_SetIOCInterruptHandler(&BTN2_CallBack);
+    </code>
+*/
+void __attribute__((deprecated("\nThis will be removed in future MCC releases. \nUse BTN2_SetInterruptHandler instead."))) BTN2_SetIOCInterruptHandler(void *handler);
+
+/**
+  @Summary
+    Assigns a function pointer with a callback address.
+
+  @Description
+    This routine assigns a function pointer with a callback address.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        BTN1_SetInterruptHandler(&BTN1_CallBack);
+    </code>
+*/
+void BTN1_SetInterruptHandler(void (* InterruptHandler)(void));
+
+/**
+  @Summary
+    Assigns a function pointer with a callback address.
+
+  @Description
+    This routine assigns a function pointer with a callback address.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        BTN1_SetIOCInterruptHandler(&BTN1_CallBack);
+    </code>
+*/
+void __attribute__((deprecated("\nThis will be removed in future MCC releases. \nUse BTN1_SetInterruptHandler instead."))) BTN1_SetIOCInterruptHandler(void *handler);
 
 
 #endif
